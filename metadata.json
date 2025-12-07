@@ -1,0 +1,7 @@
+{
+  "name": "DermScan",
+  "description": "An intelligent cosmetic ingredient analyzer that grades products based on safety and function using AI.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
