@@ -13,8 +13,13 @@ export const SavedAnalysesModal: React.FC<SavedAnalysesModalProps> = ({ isOpen, 
 
   useEffect(() => {
     if (isOpen) {
-      const items = JSON.parse(localStorage.getItem('dermscan_saved') || '[]');
-      setSavedItems(items);
+      try {
+        const items = JSON.parse(localStorage.getItem('dermscan_saved') || '[]');
+        setSavedItems(items);
+      } catch (e) {
+        console.error("Failed to parse saved analyses", e);
+        setSavedItems([]);
+      }
     }
   }, [isOpen]);
 
@@ -24,6 +29,13 @@ export const SavedAnalysesModal: React.FC<SavedAnalysesModalProps> = ({ isOpen, 
       const newItems = savedItems.filter(item => item.id !== id);
       setSavedItems(newItems);
       localStorage.setItem('dermscan_saved', JSON.stringify(newItems));
+    }
+  };
+
+  const handleClearAll = () => {
+    if (window.confirm("Are you sure you want to delete ALL saved history? This action cannot be undone.")) {
+      setSavedItems([]);
+      localStorage.removeItem('dermscan_saved');
     }
   };
 
@@ -47,12 +59,22 @@ export const SavedAnalysesModal: React.FC<SavedAnalysesModalProps> = ({ isOpen, 
              </div>
              <h3 className="font-black text-slate-800 text-lg">Your History</h3>
           </div>
-          <button 
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-600"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-1">
+            {savedItems.length > 0 && (
+              <button 
+                onClick={handleClearAll}
+                className="text-xs font-bold text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg transition-colors mr-1"
+              >
+                Clear All
+              </button>
+            )}
+            <button 
+              onClick={onClose}
+              className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-400 hover:text-slate-600"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* List */}

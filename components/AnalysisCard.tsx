@@ -49,15 +49,17 @@ const SafetyIcon = ({ level }: { level: SafetyLevel }) => {
 };
 
 const SafetyBadge = ({ level }: { level: SafetyLevel }) => {
-  const colors = {
+  const colors: Record<string, string> = {
     [SafetyLevel.SAFE]: 'bg-green-100 text-green-800 border-green-200 ring-green-500/20',
     [SafetyLevel.MODERATE]: 'bg-yellow-100 text-yellow-800 border-yellow-200 ring-yellow-500/20',
     [SafetyLevel.AVOID]: 'bg-red-100 text-red-800 border-red-200 ring-red-500/20',
     [SafetyLevel.UNKNOWN]: 'bg-slate-100 text-slate-800 border-slate-200 ring-slate-500/20',
   };
 
+  const activeColor = colors[level] || colors[SafetyLevel.UNKNOWN];
+
   return (
-    <span className={`px-2.5 py-1 rounded-full text-xs font-bold border shadow-sm ring-2 ring-offset-1 ring-offset-white ${colors[level]}`}>
+    <span className={`px-2.5 py-1 rounded-full text-xs font-bold border shadow-sm ring-2 ring-offset-1 ring-offset-white ${activeColor}`}>
       {level}
     </span>
   );
@@ -153,7 +155,7 @@ const IngredientRow: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) => 
             <span className={`font-bold text-sm truncate transition-colors ${isOpen ? 'text-indigo-900' : 'text-slate-700'}`}>
               {ingredient.name}
             </span>
-            <span className="text-xs text-slate-500 truncate font-medium">{ingredient.functions.join(', ')}</span>
+            <span className="text-xs text-slate-500 truncate font-medium">{ingredient.functions?.join(', ')}</span>
           </div>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
@@ -504,7 +506,7 @@ export const AnalysisCard: React.FC<AnalysisCardProps> = ({ result }) => {
         <div className="px-4 pb-6 space-y-1">
           {sortedIngredients.length > 0 ? (
             sortedIngredients.map((ing, idx) => (
-              <IngredientRow key={ing.name || idx} ingredient={ing} />
+              <IngredientRow key={`${ing.name}-${idx}`} ingredient={ing} />
             ))
           ) : (
             <div className="p-12 text-center text-slate-400 bg-white/30 rounded-3xl m-4 border border-dashed border-slate-300">
