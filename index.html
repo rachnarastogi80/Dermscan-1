@@ -2,114 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>DermScan - Ingredient Analyzer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'safety-green': '#10b981',
-              'safety-yellow': '#f59e0b',
-              'safety-red': '#ef4444',
-              'brand-dark': '#0f172a',
-              'brand-light': '#f8fafc',
-            },
-            animation: {
-              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'float': 'float 6s ease-in-out infinite',
-              'slideUp': 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-              'fadeIn': 'fadeIn 0.5s ease-out forwards',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              },
-              slideUp: {
-                '0%': { transform: 'translateY(20px)', opacity: '0' },
-                '100%': { transform: 'translateY(0)', opacity: '1' },
-              },
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              }
-            }
-          },
-        },
-      };
-    </script>
-    <style>
-      body {
-        background-color: #FDF8F6;
-        background-image: 
-          radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, hsla(253,16%,7%,0) 50%), 
-          radial-gradient(at 50% 0%, hsla(225,39%,30%,0) 0, hsla(225,39%,30%,0) 50%), 
-          radial-gradient(at 100% 0%, hsla(339,49%,30%,0) 0, hsla(339,49%,30%,0) 50%);
-        font-family: 'Inter', sans-serif;
-        -webkit-tap-highlight-color: transparent;
-      }
-      
-      .mesh-bg {
-        background-color: #ffdee9;
-        background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        opacity: 0.4;
-      }
-
-      .blob {
-        position: absolute;
-        filter: blur(40px);
-        z-index: -1;
-        opacity: 0.6;
-      }
-      
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
-
-      /* Custom scrollbar for better aesthetics */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1"
-  }
-}
-</script>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DermScan</title>
+  </head>
   <body>
-    <div class="mesh-bg"></div>
-    <div class="blob bg-purple-300 w-64 h-64 rounded-full top-[-10%] left-[-10%] animate-float"></div>
-    <div class="blob bg-pink-300 w-72 h-72 rounded-full bottom-[-10%] right-[-10%] animate-float" style="animation-delay: 2s"></div>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+
+    <!-- Vite entry -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
